@@ -30,7 +30,7 @@
                     <mat-grid-tile [attr.data-items-name]="items.name[0]" class="list-cell"
                         [style.background-color]="items.bgColor" *ngIf="selectedValue == item.name"
                         (click)="selectedProduct(items, $event)"
-                        [ngStyle]="selectedItem == items.name ?{'background-color': 'rgba(51, 51, 51, 0.8)'} : {'background-color': 'items.bgColor'}">
+                        [ngStyle]="items.selected ?{'background-color': 'rgba(51, 51, 51, 0.8)'} : {'background-color': items.bgColor}">
                         <p class="list-cell">{{ items.name}}</p>
                         <div class="priceList">
                             <span class="price">{{items.unitPrice}}</span> <span class="money">lekë</span>

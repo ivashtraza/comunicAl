@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { InvoiceComponent } from '../invoice/invoice/invoice.component';
 import { CofeeService } from '../service';
 
@@ -24,12 +24,13 @@ export class CafeeComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
+
     this.cafeeService.findProducts().subscribe((data) => {
       data.categories.forEach((element: any) => {
         (element.name).toUpperCase();
-         element.products.forEach((elementi:any)=> {
+        element.products.forEach((elementi: any) => {
           elementi.bgColor = this.getRandomColor()
-         });
+        });
       });
       this.cafeeItems = data.categories;
       this.headers = data.categories.map((x: { name: any; }) => x.name);
@@ -61,15 +62,37 @@ export class CafeeComponent implements OnInit {
   }
 
   getRandomColor() {
-  return '#' + (0x1000000 + Math.random() * 0xFFFFFF).toString(16).substr(1,6);
+    return '#' + (0x1000000 + Math.random() * 0xFFFFFF).toString(16).substr(1, 6);
   }
 
   selectedProduct(items: any, event: any) {
-    this.selectedItem = items.name
-    this.products.push(items);
-    console.log(this.products)
+    // this.selectedItem = items.name
+    items.selected = true;
+    let productList: any = this.cafeeService.getproductList();
+    console.log(productList)
+    if (productList != undefined) {
+      this.products.forEach((elementi: any, i: any) => {
+        if (elementi.selected == false) {
+          delete this.products[i]
+        }
+
+      });
+    }
+    if (!this.products.includes(items)) {
+      items.selected = true
+      this.products.push(items)
+    } else {
+      this.products.forEach((element: any) => {
+        if (element.name == items.name) {
+          element.selected = true;
+          element.unit = items.unit + 1;
+        }
+      });
+    }
+
+    this.cafeeService.setProductList(this.products);
     this.dialog.open(InvoiceComponent, {
-      data: this.products,
+      // data: this.products,
       panelClass: ['animate__animated', 'animate__slideInUp'],
       maxWidth: '350px',
       maxHeight: '250vh',

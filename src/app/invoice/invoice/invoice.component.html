@@ -1,16 +1,22 @@
-<mat-list class="productList"  [ngClass]="productArrayCopy.length > 4 ? 'scroll' : ''">
-    <mat-list-item *ngFor="let product of productArrayCopy; let i = index">
-        <div mat-line class="product">{{product.name}} </div>
-        <mat-form-field class="inputField" appearance="fill" autocomplete="off">
-            <input matInput [(ngModel)]="product.unit" (keyup)="multiplyPrice(product)">
-        </mat-form-field>
 
-        <input matInput class="price" (keyup)="multiplyPrice()" [(ngModel)]="product.price" disabled>
-    </mat-list-item>
-    <mat-divider class="divider"></mat-divider>
-    <div class="d-flex justify-content-between" mat-subheader>
-        <h6>TOTALI </h6>
-        <h6 class="price">{{totali}}</h6>
-    </div>
-</mat-list>
-<button mat-raised-button color="warn" style="text-transform: uppercase;" (click)="sendInvoice()">DëRGO FATURëN</button>
+    <mat-list class="productList"  [ngClass]="productArrayCopy.length > 4 ? 'scroll' : ''">
+        <mat-list-item *ngFor="let product of productArrayCopy; let i = index">
+            <div mat-line class="product">{{product.name}} </div>
+            <mat-form-field class="inputField" appearance="fill" autocomplete="off">
+                <input matInput type="number" min="1" [(ngModel)]="product.unit" (ngModelChange)="multiplyPrice(product)">
+            </mat-form-field>
+    
+            <input matInput class="price" (ngModelChange)="multiplyPrice(product)" [(ngModel)]="product.price" disabled>
+        </mat-list-item>
+        <mat-divider class="divider"></mat-divider>
+        <div class="d-flex justify-content-between" mat-subheader>
+            <h6>TOTALI </h6>
+            <h6 class="price">{{totali}}</h6>
+        </div>
+    </mat-list>
+
+    <button mat-raised-button *ngIf="totali != 0" color="warn" style="text-transform: uppercase;"  (click)="sendInvoice()">DëRGO FATURëN</button>
+    <button mat-raised-button *ngIf="totali == 0" color="warn" style="text-transform: uppercase;" disabled>DëRGO FATURëN</button>
+
+   
+
