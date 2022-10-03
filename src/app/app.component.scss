@@ -1,0 +1,35 @@
+
+
+.appClass{
+overflow-x: hidden !important;
+}
+
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: calc(100%);
+    background: #65874D;
+    height: 50px;
+    text-align: center;
+    .image{
+        width: 41px;
+        height: 41px;
+        margin-bottom: auto;
+        margin-top: auto;
+        margin-left: 1%;
+    }
+    
+    .text{
+    font-family: 'Helvetica';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 17px;
+    // margin-left: 70%;
+    text-transform: lowercase;
+    color: #FFFFFF;
+    margin-top: 13px;
+}
+
+
+}

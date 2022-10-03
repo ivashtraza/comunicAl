@@ -1,0 +1,44 @@
+<div id="main" [ngClass]="[setMode ? 'darkTheme' : '']">
+    <mat-toolbar class="bar">
+        <i class="round-circle"></i>
+        <div class="container">
+            <div class="row">
+                <div class="col-8">
+                    <span class="col businessName">{{businessName}}</span>
+                    <span class="">menu</span>
+                </div>
+                <div class="col-4 mode">
+                    <i class="bi bi-circle-half" (click)="onChangeToggle()"></i>
+                </div>
+            </div>
+        </div>
+    </mat-toolbar>
+
+    <mat-toolbar class="menu-bar">
+        <div class="class" *ngFor="let item of cafeeItems">
+            <span class="item" (click)="selectedCafeItems(item)"
+                [ngStyle]="selectedValue == item.name ?{'color': '#F44242'} : {'color': ''}">
+                {{item.name}}
+            </span>
+        </div>
+    </mat-toolbar>
+
+    <div class="products">
+        <mat-grid-list rowHeight="195" [cols]="breakpoint" (window:resize)="onResize($event)">
+            <ng-container *ngFor="let item of cafeeItems">
+                <ng-container *ngFor="let items of item.products; let i = index">
+                    <mat-grid-tile [attr.data-items-name]="items.name[0]" class="list-cell"
+                        [style.background-color]="items.bgColor" *ngIf="selectedValue == item.name"
+                        (click)="selectedProduct(items, $event)"
+                        [ngStyle]="selectedItem == items.name ?{'background-color': 'rgba(51, 51, 51, 0.8)'} : {'background-color': 'items.bgColor'}">
+                        <p class="list-cell">{{ items.name}}</p>
+                        <div class="priceList">
+                            <span class="price">{{items.unitPrice}}</span> <span class="money">lekë</span>
+                        </div>
+                    </mat-grid-tile>
+                </ng-container>
+            </ng-container>
+        </mat-grid-list>
+    </div>
+
+</div>

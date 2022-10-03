@@ -1,0 +1,69 @@
+::ng-deep {
+  .mat-form-field .mat-form-field-flex {
+    background-color: #F7F7F7;
+    width: 90px
+  }
+}
+
+.productList {
+  top: 37px;
+  height: 240px;
+  margin-top: 30px;
+
+
+.product{
+  width: auto;
+  font-family: 'Helvetica';
+  font-style: normal;
+  text-align: right;
+  text-transform: uppercase;
+
+  color: #666666;
+}
+
+.price {
+  width: 90px;
+  height: 42px;
+top: 37px;
+
+font-family: 'Helvetica';
+font-style: normal;
+font-weight: 700;
+font-size: 24px;
+line-height: 28px;
+align-items: flex-end;
+text-align: right;
+text-transform: uppercase;
+
+color: #F44242;
+}
+}
+
+.divider {
+  margin-left: 15px
+}
+
+.totali {
+  justify-content: between !important;
+}
+
+.mat-raised-button {
+  width: 100%;
+}
+
+
+::ng-deep  .mat-form-field-appearance-fill .mat-form-field-flex {
+  padding: 0em !important;
+}
+
+::ng-deep .mat-form-field-wrapper{
+  margin-left: 20% !important;
+}
+
+::ng-deep .mat-form-field-underline {
+  display: none;
+}
+
+.scroll{
+  overflow-y: auto;
+}
